@@ -2,13 +2,13 @@
 angular.module('daygoalController', [])
 
 // inject the Daygoal service factory into our controller
-.controller('mainController', function($scope, $http, $timeout, Daygoal, Upload) {
+.controller('mainController', function($scope, $http, $timeout, Daygoals, Upload) {
     $scope.formData = {};
 
     // GET =====================================================================
     // when landing on the page, get all daygoals and show them
     // use the service to get all the daygoals
-    Daygoal.get()
+    Daygoals.get()
         .success(function(data) {
             $scope.daygoals = data;
         });

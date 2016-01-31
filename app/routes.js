@@ -81,8 +81,9 @@ module.exports = function(app, passport) {
 	    // create a daygoal, information comes from AJAX request from Angular
 	    Daygoal.create({
 	        text : req.body.info.text,
-	        price: req.body.info.price,
-	        address: req.body.info.address,
+	        category: req.body.info.category,
+	        weektarget: req.body.info.weektarget,
+	        duration: req.body.info.duration,
 	        author: req.session.user.local.display_name,
 	        photo: req.file.filename,
 	        done : false

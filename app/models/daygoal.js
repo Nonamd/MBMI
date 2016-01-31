@@ -5,9 +5,10 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Daygoal', {
     text : String,
-    price: Number,
+    category: String,	
+    weektarget: String,
+    duration: Number,
     author: String,
-    address: String,
     photo: String,
     done : Boolean
 });

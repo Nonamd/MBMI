@@ -53,13 +53,13 @@
         </div>
 
         <!-- DAYGOALS LIST -->
-        <div id="daygoals-list" class="row">
+        <div id="daygoal-list" class="row">
             <div class="col-sm-4 col-sm-offset-4">
 
                 <!-- LOOP OVER THE DAYGOALS IN $scope.daygoals -->
                 <div class="checkbox" ng-repeat="daygoal in daygoals">
                     <label>
-                        <input type="checkbox" ng-click="deleteDaygoal(daygoal._id)"> <a href="/uploads/{{Daygoal.photo}}" target="_blank">{{ Daygoal.text }} ({{ Daygoal.price }}) - {{ Daygoal.author }} at {{ Daygoal.address }}</a>
+                        <input type="checkbox" ng-click="deleteDaygoal(daygoal._id)"> <a href="/uploads/{{Daygoal.photo}}" target="_blank">{{ daygoal.text }} {{ daygoal.weektarget }} ({{ daygoal.category }}) - {{ daygoal.author }} at {{ daygoal.duration }}</a>
                     </label>
                 </div>
 
@@ -73,14 +73,15 @@
                     <div class="form-group">
 
                         <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
-                        <input type="text" class="form-control input-lg text-center" placeholder="Your Address" ng-model="formData.address">
-                        <input type="number" class="form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
-                        <input ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="" type="file">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Enter One of Your Top 5 Actions for Today" ng-model="formData.text">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Weekly Progress Action or Alleviate a Mind Gremlin" ng-model="formData.category">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Name the Weekly Goal That Will Progress from this Action" ng-model="formData.weektarget">
+                        <input type="number" class="form-control input-lg text-center" placeholder="How Many Minutes Do You Need to Complete This Action" ng-model="formData.duration">
+                        <input ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="false" type="file">
                     </div>
 
                     <!-- createDaygoal() WILL CREATE NEW Daygoal -->
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createdaygoal(picFile)">Add</button><br />
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createDaygoal(picFile)">Add</button><br />
                     <a class="btn btn-danger btn-lg" href="/logout">Logout</a>
                 </form>
             </div>
