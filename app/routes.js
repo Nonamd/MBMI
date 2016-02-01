@@ -82,6 +82,7 @@ module.exports = function(app, passport) {
 	    Daygoal.create({
 	        text : req.body.info.text,
 	        category: req.body.info.category,
+	        priority: req.body.info.priority,
 	        weektarget: req.body.info.weektarget,
 	        duration: req.body.info.duration,
 	        author: req.session.user.local.display_name,

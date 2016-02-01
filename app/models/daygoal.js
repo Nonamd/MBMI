@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 module.exports = mongoose.model('Daygoal', {
     text : String,
     category: String,	
+    priority: Number,
     weektarget: String,
     duration: Number,
     author: String,

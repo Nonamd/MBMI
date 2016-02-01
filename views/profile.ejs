@@ -35,18 +35,23 @@
     <script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
+
+
+
 <!-- SET THE CONTROLLER AND GET ALL DAYGOALS -->
 <body ng-controller="mainController">
     <div class="container">
 
         <!-- HEADER AND DAYGOALS COUNT -->
         <div class="jumbotron text-center">
+
             <% if (user.local.email == "test@test.com") { %>
                 <h1>What up <%= user.local.display_name %>!!!!! <span class="label label-info">{{ Daygoal.length }}</span></h1>
             <% }
                 else {
             %>
-                <h1>You're not rob...</h1>
+                <img alt="Brand" src="MBMI_logo.png" style="width:15%;height:15%;">
+                <h1 style="color: #6C1BC7">My Five Choices To Progress on My Journey Today...</h1>
             <%
                 }
             %>
@@ -54,35 +59,63 @@
 
         <!-- DAYGOALS LIST -->
         <div id="daygoal-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-sm-12">
 
                 <!-- LOOP OVER THE DAYGOALS IN $scope.daygoals -->
-                <div class="checkbox" ng-repeat="daygoal in daygoals">
+                 <table style="width:100%">
+                          <tr style="border: 2px solid #454ADE">
+                            <th>Done? </th>
+                            <th>The Actions I am Choosing for Today</th> 
+                            <th>Priority</th>
+                            <th>Support My Weekly Target of...</th>
+                            <th>Focus Category</th>
+                            <th>Minutes to Complete</th>
+                          </tr>
+                          <tr ng-repeat="daygoal in daygoals">
+                            <td style="border: 2px dotted #53ED40"><input type="checkbox" ng-click="deleteDaygoal(daygoal._id)"> </td>
+                            <td style="border: 2px dotted #53ED40">{{ daygoal.text }}</td> 
+                            <td style="border: 2px dotted #53ED40">{{ daygoal.priority }}</td> 
+                            <td style="border: 2px dotted #53ED40">{{ daygoal.weektarget }}</td> 
+                            <td style="border: 2px dotted #53ED40">{{ daygoal.category }}</td> 
+                            <td style="border: 2px dotted #53ED40">{{ daygoal.duration }}</td> 
+                          </tr>
+                        </table>
+
+
+                <!-- <div class="checkbox" ng-repeat="daygoal in daygoals">
                     <label>
-                        <input type="checkbox" ng-click="deleteDaygoal(daygoal._id)"> <a href="/uploads/{{Daygoal.photo}}" target="_blank">{{ daygoal.text }} {{ daygoal.weektarget }} ({{ daygoal.category }}) - {{ daygoal.author }} at {{ daygoal.duration }}</a>
+                        <input type="checkbox" ng-click="deleteDaygoal(daygoal._id)"> <a href="/uploads/{{daygoal.photo}}" target="_blank">{{ daygoal.text }} {{ daygoal.weektarget }} ({{ daygoal.category }}) - {{ daygoal.author }} at {{ daygoal.duration }}</a>
                     </label>
                 </div>
-
+ 
             </div>
         </div>
 
         <!-- FORM TO CREATE DAYGOALS -->
+
+
         <div id="daygoal-form" class="row">
             <div class="col-sm-8 col-sm-offset-2 text-center">
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
 
+
+                        <h2 style="color: #6C1BC7">Create a New Daily Action Item</h2>
+
                         <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="Enter One of Your Top 5 Actions for Today" ng-model="formData.text">
-                        <input type="text" class="form-control input-lg text-center" placeholder="Weekly Progress Action or Alleviate a Mind Gremlin" ng-model="formData.category">
-                        <input type="text" class="form-control input-lg text-center" placeholder="Name the Weekly Goal That Will Progress from this Action" ng-model="formData.weektarget">
-                        <input type="number" class="form-control input-lg text-center" placeholder="How Many Minutes Do You Need to Complete This Action" ng-model="formData.duration">
+
+
+                        <input type="text" class="form-control input-lg text-center" placeholder="Enter One of Your Top 5 Actions for Today" style="border: 1px solid #53ED40" ng-model="formData.text">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Weekly Progress Action or Alleviate a Mind Gremlin" style="border: 1px solid #53ED40" ng-model="formData.category">
+                        <input type="number" class="form-control input-lg text-center" placeholder="Priority Rank (From 1 to 5 where 1 is Top Priority)" style="border: 1px solid #53ED40" ng-model="formData.priority">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Name the Weekly Goal That Will Progress from this Action" style="border: 1px solid #53ED40" ng-model="formData.weektarget">
+                        <input type="number" class="form-control input-lg text-center" placeholder="How Many Minutes Do You Need to Complete This Action" style="border: 1px solid #53ED40"  ng-model="formData.duration">
                         <input ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="false" type="file">
                     </div>
 
                     <!-- createDaygoal() WILL CREATE NEW Daygoal -->
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createDaygoal(picFile)">Add</button><br />
-                    <a class="btn btn-danger btn-lg" href="/logout">Logout</a>
+                    <button type="submit" class="btn btn-primary btn-md" ng-click="createDaygoal(picFile)">Add</button><br />
+                    <a class="btn btn-danger btn-md" href="/logout">Logout</a>
                 </form>
             </div>
         </div>
